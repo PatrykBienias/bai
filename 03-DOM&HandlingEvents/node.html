@@ -4,10 +4,36 @@
 		<title>Create DOM elements</title>
 		<meta charset="UTF-8">
 	</head>
+	<style>
+		table {
+			border: 1;
+			border-collapse: collapse;
+		}
+		table,th,td {
+			border: 1px solid black;
+		}
+		td {
+			width: 100px;
+			text-align: center;
+		}
+	</style>
 	<body>
 		<script>
 			// a JavaScript code here ...
-			
+			let body = document.getElementsByTagName("body")[0];
+			let table = document.createElement("table");
+			body.appendChild(table);
+			let value = 1;
+			for(let i=0;i<2;i++){
+				let row = document.createElement("tr");
+				for(let j=0;j<2;j++){
+					let cell = document.createElement("td");
+					cell.innerHTML = value;
+					row.appendChild(cell);
+					value++;
+				}
+				table.appendChild(row);
+			}
 		</script>
 	</body>
 </html>

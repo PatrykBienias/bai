@@ -9,8 +9,8 @@
 <body>
     <h1>Shopping List</h1>
     <p>
-        New item: <input type="text" name="item">
-        <button type="button">Add</button>
+        New item: <input type="text" name="item" id = "item">
+        <button type="button" onclick="add()" id = "button">Add</button>
     </p>
     <h3>List of items</h3>
     <ol>
@@ -21,6 +21,34 @@
 
     <script>
     	// a JavaScript code here ...
+
+        function remove(item) {
+            item.remove();
+        }
+
+        function add(){
+            var newItem = document.getElementsByName("item")[0].value
+            var item = document.createElement("li")
+            
+            item.appendChild(document.createTextNode(newItem));
+
+            var list = document.getElementsByTagName("ol")[0];
+
+            list.appendChild(item);
+
+            document.getElementById("item").value = ""
+            
+            $(item).dblclick(function () {
+                remove(this);
+            });
+        }
+
+        $(document).ready(function(){
+            $("li").dblclick(function() {
+                this.remove();
+            });
+        });
+
 
     </script>
 </body>
