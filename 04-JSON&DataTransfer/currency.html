@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Currency</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <h1>Currency</h1>
+    <div id="currencies"></div>
+    
+    </body>
+
+    <script>
+        const currencyList = ["EUR", "USD", "GBP"];
+
+        function loadCurrency(currency){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() { 
+                displayCurrency(this);
+            }
+
+            xhr.open('GET', `http://api.nbp.pl/api/exchangerates/rates/A/${currency}`)
+            xhr.send();
+        }
+
+        function displayCurrency(r){
+            if(r.readyState == r.DONE && r.status == 200){
+                var dataJson = JSON.parse(r.responseText);
+                var elementP = document.createElement("p");
+
+                elementP.innerText = `${dataJson.currency} (${dataJson.code} and ${dataJson.rates[0].mid})`
+                document.getElementById('currencies').appendChild(elementP);
+            }
+        }
+
+        currencyList.forEach(loadCurrency)
+    </script>
+</html>
