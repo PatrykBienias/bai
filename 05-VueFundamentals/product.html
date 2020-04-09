@@ -5,7 +5,21 @@
 </head>
 <body>
   <h1>Grades</h1>    
-
+  <div id ="app" style="width: 150px;">
+    <p>
+      <b>
+        RECEIPT
+      </b> <br>
+      <hr style="border-top: 1px dashed;">
+      Product: {{product.name}}<br>
+      Unit Price: {{product.unitPrice}}<br>
+      Quantity: {{product.quantity}}<br>
+      Amount: {{ammount}}<br>
+      VAT Tax Rate: {{product.VAT}}%<br>
+    </p>
+    <hr style="border-top: 1px dashed;">
+    <h2>Total: {{total}}</h2>
+  </div>
   <script>
     var app = new Vue({
       el: '#app',
@@ -15,6 +29,14 @@
           unitPrice: 17.5,
           quantity: 3,
           VAT: 23
+        }
+      },
+      computed: {
+        ammount: function() {
+          return this.product.unitPrice * this.product.quantity
+        },
+        total: function() {
+          return (this.ammount * (1+this.product.VAT / 100)).toFixed(2)
         }
       }
     });
